@@ -118,6 +118,12 @@ ComandoDescripcióndocker build -t <imagen> .Construye imagen desde Dockerfiledo
 
 ✅ Evidencia de Funcionamiento
 ServicioURL
+
+
 🌐 Frontendhttp://3.221.68.2/
+
+
 ⚙️ Backend (Swagger)http://52.22.229.227:8080/swagger-ui/index.html
+
+
 🗄️ Base de Datos52.200.43.216, 1433 (via SSMS)
