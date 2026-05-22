@@ -1,0 +1,41 @@
+FROM node:lts-alpine as build
+
+
+WORKDIR /app
+
+
+COPY package.json package-lock.json ./
+
+
+RUN npm install
+
+
+COPY . .
+
+
+RUN npm run build -- --configuration production
+
+
+FROM nginx:alpine
+
+
+# Copiar los archivos compilados (nota: tu build genera en /browser)
+COPY --from=build /app/dist/CRUD/browser /usr/share/nginx/html
+
+
+# Crear script de entrada que reemplaza la URL del backend
+RUN echo '#!/bin/sh' > /entrypoint.sh && \
+    echo 'echo "🔧 Backend URL: ${BACKEND_URL:-http://localhost:8080}"' >> /entrypoint.sh && \
+    echo 'echo "📁 Reemplazando URL en archivos JavaScript..."' >> /entrypoint.sh && \
+    echo 'find /usr/share/nginx/html -type f -name "*.js" -exec sed -i "s|http://localhost:8080|${BACKEND_URL:-http://localhost:8080}|g" {} \;' >> /entrypoint.sh && \
+    echo 'echo "✅ Reemplazo completado"' >> /entrypoint.sh && \
+    echo 'echo "🚀 Iniciando Nginx..."' >> /entrypoint.sh && \
+    echo 'nginx -g "daemon off;"' >> /entrypoint.sh && \
+    chmod +x /entrypoint.sh
+
+
+EXPOSE 80
+
+
+# Usar entrypoint en lugar de CMD
+ENTRYPOINT ["/entrypoint.sh"]

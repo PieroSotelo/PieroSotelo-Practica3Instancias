@@ -1,0 +1,34 @@
+# docker compose -f docker-compose-piero/docker-compose-be.yml up -d --build
+# docker compose -f docker-compose-piero/docker-compose-be.yml down
+
+# si da error por algo de my-network, ejecutar el siguiente comando para crear la red: 
+# docker network create my-network
+
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: Dockerfile-piero/Dockerfile
+
+    image: pierosotelo/springboot-sqlserver:1.0
+    container_name: springboot-sqlserver
+
+    ports:
+      - "8085:8085"
+
+    environment:
+      - SERVER_PORT=8085
+      - SERVER_URL=http://localhost:8085
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sql-server:1433;databaseName=losQueensAgroDB;encrypt=false;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=losQueens123!
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external: true

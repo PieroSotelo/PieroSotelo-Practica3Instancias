@@ -1,0 +1,31 @@
+<!-- Contenedor principal de la pagina-->
+ <div class="productos-container">
+    <div class="section-header">
+        <h2>Gestión de Productos</h2>
+    </div>
+
+    <!--Formulario de creación / edición-->
+
+    <app-producto-form
+        [productoId]="editingProductoId"
+        (onSave)="onProductoSaved()"
+        (onCancel)="closeForm()"
+    ></app-producto-form>
+
+    <!--Botón para recargar la lista-->
+    <div class="list-actions">
+        <button class="btn btn-list" (click)="loadProductos()">
+        Listar productos
+        </button>
+    </div>
+
+    <!--Lista de productos-->
+
+    <app-producto-list
+        [productos]="productos"
+        [emptyMessage]="'No hay productos registrados. Crea uno nuevo.'"
+        (onEdit)="openForm($event)"
+        (onDelete)="deleteProducto($event)"
+        (onRestore)="restoreProducto($event)"
+    ></app-producto-list>
+ </div>

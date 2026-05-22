@@ -1,0 +1,32 @@
+<div class="person-list-wrapper">
+  <h2>Lista de Personas</h2>
+
+  <table class="person-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Documento</th>
+        <th>Email</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of persons">
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }} {{ p.last_name }}</td>
+        <td>{{ p.document_number }}</td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.state === 'A' ? 'Activo' : 'Inactivo' }}</td>
+        <td>
+          <button type="button" (click)="edit(p)">Editar</button>
+          <button type="button" (click)="delete(p.id)">Desactivar</button>
+          <button *ngIf="p.state === 'I'" type="button" (click)="restore(p.id)">
+            Restaurar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

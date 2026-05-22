@@ -1,0 +1,93 @@
+/* Fondo general */
+.page {
+  background: #f5f5f5;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.header {
+  background: #3a3a3a;
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.btn-back {
+  background: transparent;
+  border: 1px solid #aaa;
+  color: white;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* CONTENEDOR */
+.container {
+  width: 80%;
+  margin: 30px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+/* TITULO */
+.container h2 {
+  margin-bottom: 20px;
+}
+
+/* FORMULARIO */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.form input,
+.form select {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* BOTONES */
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: #666;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-secondary {
+  background: #bbb;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}

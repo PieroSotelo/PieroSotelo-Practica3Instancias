@@ -1,0 +1,107 @@
+<!--Formulario reactivo-->
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h3>{{ isEdit ? 'Editar Producto' : 'Crear Nuevo Producto' }}</h3>
+
+  <!--Categeria-->
+  <div class="form-group">
+    <label for="category_id">ID de categoría</label>
+    <input
+      id="category_id"
+      type="number"
+      formControlName="category_id"
+      placeholder="Ej: 1"
+      min="1"
+    />
+    <div *ngIf="form.get('category_id')?.invalid && form.get('category_id')?.touched" class="error">
+      La categoría es requerida
+    </div>
+  </div>
+  <!--Proovedor-->
+  <div class="form-group">
+    <label for="supplier_id">ID de proveedor</label>
+    <input
+      id="supplier_id"
+      type="number"
+      formControlName="supplier_id"
+      placeholder="Ej: 1"
+      min="1"
+    />
+    <div *ngIf="form.get('supplier_id')?.invalid && form.get('supplier_id')?.touched" class="error">
+      El proveedor es requerido
+    </div>
+  </div>
+  <!--Nombre-->
+  <div class="form-group">
+    <label for="name">Nombre del producto</label>
+    <input id="name" type="text" formControlName="name" placeholder="Ej: Herbicida" />
+    <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="error">
+      El nombre es requerido y debe tener al menos 3 caracteres
+    </div>
+  </div>
+  <!--Descripción-->
+  <div class="form-group">
+    <label for="description">Descripción</label>
+    <input
+      id="description"
+      type="text"
+      formControlName="description"
+      placeholder="Describe el producto..."
+    />
+    <div *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="error">
+      La descripción es requerida y debe tener al menos 10 caracteres
+    </div>
+  </div>
+
+  <!--Unidad de medida-->
+  <div class="form-group">
+    <label for="media_unit">Unidad de medida</label>
+    <input id="media_unit" type="text" formControlName="media_unit" placeholder="Ej: kg" />
+    <div *ngIf="form.get('media_unit')?.invalid && form.get('media_unit')?.touched" class="error">
+      La unidad de medida es requerida
+    </div>
+  </div>
+
+  <!--precio-->
+  <div class="form-group">
+    <label for="unit_price">Precio unitario</label>
+    <input
+      id="unit_price"
+      type="number"
+      formControlName="unit_price"
+      placeholder="0.00"
+      min="0"
+      step="0.01"
+    />
+    <div *ngIf="form.get('unit_price')?.invalid && form.get('unit_price')?.touched" class="error">
+      El precio debe ser un número mayor o igual a 0
+    </div>
+  </div>
+  <!--Fecha de vencimiento-->
+  <div class="form-group">
+    <label for="expiration_date">Fecha de vencimiento</label>
+    <input id="expiration_date" type="datetime-local" formControlName="expiration_date" />
+    <div
+      *ngIf="form.get('expiration_date')?.invalid && form.get('expiration_date')?.touched"
+      class="error"
+    >
+      La fecha de vencimiento es requerida
+    </div>
+  </div>
+
+  <!--Estado-->
+  <div class="form-group" *ngIf="isEdit">
+    <label for="state">Estado</label>
+    <select id="state" formControlName="state">
+      <option value="A">Activo</option>
+      <option value="I">Inactivo</option>
+    </select>
+  </div>
+
+  <!--Botones de acción-->
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ isEdit ? 'Actualizar' : 'Crear' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

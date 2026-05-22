@@ -1,0 +1,53 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre Comercial</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+        <th>Ubigeo</th>
+        <th>RUC</th>
+        <th>Dirección</th>
+        <th>Estado</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of suppliers" [class.inactive]="supplier.status !== 'A'">
+        <td>{{ supplier.id }}</td>
+        <td><strong>{{ supplier.commercial_name }}</strong></td>
+        <td>{{ supplier.phone }}</td>
+        <td>{{ supplier.email }}</td>
+        <td><span class="badge-code">{{ supplier.ubigeo_code }}</span></td>
+        <td>{{ supplier.ruc }}</td>
+        <td>{{ supplier.address }}</td>
+        <td>
+          <span class="status-badge" [ngClass]="supplier.status === 'A' ? 'badge-active' : 'badge-inactive'">
+            {{ supplier.status === 'A' ? 'Activo' : 'Inactivo' }}
+          </span>
+        </td>
+        <td class="text-center">
+          <div class="action-buttons">
+            <ng-container *ngIf="supplier.status === 'A'; else inactiveActions">
+              <button class="btn-action btn-edit" (click)="edit(supplier.id)">
+                Editar
+              </button>
+              <button class="btn-action btn-delete" (click)="delete(supplier.id)">
+                Eliminar
+              </button>
+            </ng-container>
+            <ng-template #inactiveActions>
+              <button class="btn-action btn-restore" (click)="restore(supplier.id)">
+                Reactivar
+              </button>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="suppliers.length === 0">
+        <td colspan="9" class="no-data">No se encontraron proveedores registrados.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

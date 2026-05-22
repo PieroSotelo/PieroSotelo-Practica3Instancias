@@ -1,0 +1,43 @@
+<div class="crud-layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">LQA</div>
+      <div class="brand-text">
+        <p class="brand-caption">Panel principal</p>
+        <h2>Los Queens Agro S.A.C.</h2>
+      </div>
+    </div>
+
+    <button class="sidebar-item" type="button">{{ menuLabel }}</button>
+  </aside>
+
+  <main class="main-panel">
+    <section class="hero">
+      <span class="chip">CRUD</span>
+      <h1>{{ title }}</h1>
+      <p>{{ subtitle }}</p>
+    </section>
+
+    <section class="cards" aria-label="Módulos CRUD">
+      <button
+        *ngFor="let card of cards"
+        type="button"
+        class="card-btn"
+        [ngClass]="card.tone"
+        (click)="selectSection(card.id)"
+      >
+        {{ card.label }}
+      </button>
+    </section>
+
+    <section class="content-shell">
+      <ng-container *ngIf="selectedSection; else emptyState">
+        <ng-content></ng-content>
+      </ng-container>
+
+      <ng-template #emptyState>
+        <p>Selecciona un CRUD para verlo aquí.</p>
+      </ng-template>
+    </section>
+  </main>
+</div>

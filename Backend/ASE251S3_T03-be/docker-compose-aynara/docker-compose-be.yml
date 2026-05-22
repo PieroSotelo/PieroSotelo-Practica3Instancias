@@ -1,0 +1,25 @@
+# docker compose -f docker-compose-aynara/docker-compose-be.yml up -d --build
+# docker compose -f docker-compose-aynara/docker-compose-be.yml down
+version: '3'
+
+services:
+  backend:
+    image: aynaranolazco/springboot-sqlserver:1.0
+    container_name: backend-aynara
+    ports:
+      - "8080:8080"
+       
+    environment:
+      - SERVER_PORT=8080
+      - SERVER_URL=http://localhost:8080
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sql-server:1433;databaseName=losQueensAgroDB;encrypt=false;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=losQueens123!
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
+    networks:
+      - my-network   
+
+networks:
+  my-network:
+    name: my-network
+    driver: bridge

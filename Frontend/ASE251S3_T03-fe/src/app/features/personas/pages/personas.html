@@ -1,0 +1,37 @@
+<div class="personas-container">
+  <div class="section-header">
+    <h2>Gestión de Personas</h2>
+    <button class="btn btn-primary" *ngIf="!isFormOpen" (click)="openForm()">
+      Nueva Persona
+    </button>
+  </div>
+
+  <div *ngIf="isFormOpen" class="form-section">
+    <div class="section-card">
+      <div class="card-header">
+        <h3>{{ editingPerson ? 'Editar Persona' : 'Registrar Persona' }}</h3>
+        <button class="btn-close" type="button" (click)="closeForm()">×</button>
+      </div>
+      <app-person-form
+        [personEdit]="editingPerson"
+        (saved)="onSaved()"
+        (cancel)="closeForm()"
+      ></app-person-form>
+    </div>
+  </div>
+
+  <div class="list-actions">
+    <button class="btn btn-list" type="button" (click)="loadPersons()">
+      Listar personas
+    </button>
+  </div>
+
+  <div class="list-section">
+    <app-person-list
+      [persons]="persons"
+      (onEdit)="openForm($event)"
+      (onDelete)="deletePerson($event)"
+      (onRestore)="restorePerson($event)"
+    ></app-person-list>
+  </div>
+</div>

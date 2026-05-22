@@ -1,0 +1,56 @@
+<div class="page">
+  <div class="container">
+    <h2>{{ personEdit ? 'Editar Registro' : 'Nuevo Registro' }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+      <label>Ubigeo (6 dígitos)</label>
+      <input formControlName="ubigeo_code" placeholder="Ej: 150101" />
+
+      <label>Nombre</label>
+      <input formControlName="name" placeholder="Ej: Juan" />
+
+      <label>Apellido</label>
+      <input formControlName="last_name" placeholder="Ej: Pérez" />
+
+      <label>Tipo de documento</label>
+      <select formControlName="document_type">
+        <option value="DNI">DNI</option>
+        <option value="CE">Carnet de Extranjería</option>
+      </select>
+
+      <label>Número de documento</label>
+      <input formControlName="document_number" />
+
+      <label>Teléfono</label>
+      <input formControlName="phone" placeholder="Ej: 987654321" />
+
+      <label>Email</label>
+      <input formControlName="email" />
+
+      <label>Dirección</label>
+      <input formControlName="street" />
+
+      <label>Rol</label>
+      <select formControlName="role">
+        <option value="ADM">Administrador</option>
+        <option value="EMP">Empleado</option>
+        <option value="CLI">Cliente</option>
+      </select>
+
+      <label>Estado</label>
+      <select formControlName="state">
+        <option value="A">Activo</option>
+        <option value="I">Inactivo</option>
+      </select>
+
+      <div class="buttons">
+        <button type="submit" class="btn-primary">
+          {{ personEdit ? 'Actualizar' : 'Guardar' }}
+        </button>
+        <button type="button" class="btn-secondary" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

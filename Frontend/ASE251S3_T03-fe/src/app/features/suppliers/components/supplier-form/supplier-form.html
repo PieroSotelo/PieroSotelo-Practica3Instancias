@@ -1,0 +1,66 @@
+<form [formGroup]="supplierForm" (ngSubmit)="submitForm()" class="form-grid">
+  
+  <div class="form-group">
+    <label for="commercial_name">Nombre Comercial <span class="required">*</span></label>
+    <input id="commercial_name" type="text" formControlName="commercial_name" class="form-control" [class.is-invalid]="isFieldInvalid('commercial_name')">
+    <div *ngIf="isFieldInvalid('commercial_name')" class="error-message">
+      El nombre comercial es obligatorio.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="ruc">RUC <span class="required">*</span></label>
+    <input id="ruc" type="text" formControlName="ruc" class="form-control" [class.is-invalid]="isFieldInvalid('ruc')">
+    <div *ngIf="isFieldInvalid('ruc')" class="error-message">
+      El RUC debe tener exactamente 11 caracteres.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Teléfono <span class="required">*</span></label>
+    <input id="phone" type="text" formControlName="phone" class="form-control" [class.is-invalid]="isFieldInvalid('phone')">
+    <div *ngIf="isFieldInvalid('phone')" class="error-message">
+      El teléfono es obligatorio (máx 9 caracteres).
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Correo Electrónico <span class="required">*</span></label>
+    <input id="email" type="email" formControlName="email" class="form-control" [class.is-invalid]="isFieldInvalid('email')">
+    <div *ngIf="isFieldInvalid('email')" class="error-message">
+      Ingrese un correo electrónico válido.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="ubigeo_code">Código de Ubigeo <span class="required">*</span></label>
+    <input id="ubigeo_code" type="text" formControlName="ubigeo_code" class="form-control" [class.is-invalid]="isFieldInvalid('ubigeo_code')">
+    <div *ngIf="isFieldInvalid('ubigeo_code')" class="error-message">
+      El código de ubigeo es obligatorio.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="status">Estado</label>
+    <select id="status" formControlName="status" class="form-control">
+      <option value="A">Activo</option>
+      <option value="I">Inactivo</option>
+    </select>
+  </div>
+
+  <div class="form-group full-width">
+    <label for="address">Dirección Completa <span class="required">*</span></label>
+    <input id="address" type="text" formControlName="address" class="form-control" [class.is-invalid]="isFieldInvalid('address')">
+    <div *ngIf="isFieldInvalid('address')" class="error-message">
+      La dirección es obligatoria.
+    </div>
+  </div>
+
+  <div class="form-actions full-width">
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+    <button type="submit" class="btn btn-success" [disabled]="supplierForm.invalid">
+      {{ supplierId ? 'Actualizar' : 'Guardar' }}
+    </button>
+  </div>
+
+</form>

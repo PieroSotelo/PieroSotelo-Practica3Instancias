@@ -1,0 +1,17 @@
+<app-crud-layout
+  [cards]="cards"
+  [selectedSection]="selectedSection"
+  (sectionSelected)="selectSection($event)"
+>
+  <div *ngIf="selectedSection === 'productos'">
+    <app-productos></app-productos>
+  </div>
+
+  <div *ngIf="selectedSection === 'personas'">
+    <app-personas></app-personas>
+  </div>
+
+  <div *ngIf="selectedSection === 'suppliers'">
+    <app-suppliers></app-suppliers>
+  </div>
+</app-crud-layout>

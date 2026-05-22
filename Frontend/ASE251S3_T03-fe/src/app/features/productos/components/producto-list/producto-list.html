@@ -1,0 +1,79 @@
+<!--Contenedor principal de la lista-->
+<div class="productos-list">
+  <!--Mensaje vacio cuando no hay productos -->
+  <div *ngIf="productos.length === 0" class="empty-state">
+    <p>{{ emptyMessage }}</p>
+  </div>
+
+  <!--Tabla de productos -->
+  <div *ngIf="productos.length > 0" class="table-responsive">
+    <table class="productos-table">
+      <!--Encabezados de columnas-->
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Categoría</th>
+          <th>Proveedor</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Unidad</th>
+          <th>Precio</th>
+          <th>Vencimiento</th>
+          <th>Estado</th>
+          <th>Última acción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let producto of productos" [class.inactive]="producto.state !== 'A'">
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.category_id }}</td>
+          <td>{{ producto.supplier_id }}</td>
+          <td>{{ producto.name }}</td>
+          <td>{{ producto.description }}</td>
+          <td>{{ producto.media_unit }}</td>
+          <td>{{ producto.unit_price | number: '1.2-2' }}</td>
+          <td>{{ producto.expiration_date }}</td>
+          <td>
+            <span class="status" [class.active]="producto.state === 'A'">
+              {{ producto.state === 'A' ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <td>
+            <span class="action-label">{{ getActionLabel(producto) }}</span>
+            <div class="action-date" *ngIf="getActionDate(producto) as actionDate">
+              {{ actionDate | date: 'dd/MM/yyyy HH:mm' }}
+            </div>
+            <div class="action-date" *ngIf="!getActionDate(producto)">Sin fecha</div>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <ng-container *ngIf="producto.state === 'A'; else restoreButton">
+                <button class="btn btn-edit" (click)="editProducto(producto.id)" title="Editar">
+                  Editar
+                </button>
+                <button
+                  class="btn btn-delete"
+                  (click)="deleteProducto(producto.id)"
+                  title="Desactivar"
+                >
+                  Eliminar
+                </button>
+              </ng-container>
+              <ng-template #restoreButton>
+                <button
+                  class="btn btn-restore"
+                  (click)="restoreProducto(producto.id)"
+                  title="Reactivar"
+                >
+                  Reactivar
+                </button>
+              </ng-template>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

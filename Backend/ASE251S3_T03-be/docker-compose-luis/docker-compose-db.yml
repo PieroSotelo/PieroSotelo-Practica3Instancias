@@ -1,0 +1,22 @@
+# docker compose -f docker-compose-luis/docker-compose-db.yml up -d
+# docker compose -f docker-compose-luis/docker-compose-db.yml down
+version: '3'
+
+services:
+  sqlserver:
+    image: luis280707/sql-server:2022
+    container_name: sql-server
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "losQueens123!"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    networks:
+      - my-network
+
+# CREAR UNA RED EN ESTE COMPOSE PARA QUE SEA COMPARTIDA
+networks:
+  my-network:
+    name: my-network
+    driver: bridge
