@@ -117,4 +117,7 @@ docker ps
 ComandoDescripcióndocker build -t <imagen> .Construye imagen desde Dockerfiledocker push <imagen>Publica imagen en Docker Hubdocker pull <imagen>Descarga imagen desde Docker Hubdocker run -d ...Ejecuta contenedor en segundo planodocker psLista contenedores en ejecucióndocker start <nombre>Inicia un contenedor detenido--restart unless-stoppedReinicio automático salvo parada manual-v sql_data:/var/opt/mssqlVolumen persistente para datos-e VAR=valorPasa variable de entorno al contenedor-p host:containerMapea puerto del host al contenedor
 
 ✅ Evidencia de Funcionamiento
-ServicioURL🌐 Frontendhttp://3.221.68.2/⚙️ Backend (Swagger)http://52.22.229.227:8080/swagger-ui/index.html🗄️ Base de Datos52.200.43.216, 1433 (via SSMS)
+ServicioURL
+🌐 Frontendhttp://3.221.68.2/
+⚙️ Backend (Swagger)http://52.22.229.227:8080/swagger-ui/index.html
+🗄️ Base de Datos52.200.43.216, 1433 (via SSMS)
